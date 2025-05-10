@@ -1,0 +1,207 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using System.Security.Claims;
+@model CarSystem.Models.Advertisement
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Details";
+    string reserverId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+
+}
+<br />
+
+<h2 class="text-primaryry">Details </h2>
+<form asp-action="" method="post" enctype="multipart/form-data">
+
+    <div asp-validation-summary="ModelOnly" class="p-4 rounded border"></div>
+    <div class="card-group row p-4 rounded border">
+
+        <div class="col-8">
+            <div class="form-group">
+                <div class="col-4">
+                    <label asp-for="CarName" class="control-lable"></label>
+                </div>
+                <div class="col-8">
+                    <input type="hidden" asp-for="Id" readonly="readonly" />
+                    <input asp-for="CarName" class="form-control" readonly="readonly" />
+                </div>
+
+                <span asp-validation-for="CarName"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-4">
+                    <label asp-for="Price" class="control-lable"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Price" class="form-control" readonly="readonly" />
+                </div>
+
+                <span asp-validation-for="Price"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-4">
+                    <label asp-for="Image"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Image" class="form-control" type="file" readonly="readonly" />
+                </div>
+
+                <span asp-validation-for="Image"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-4">
+                    <label asp-for="ManufacturingYear" class="control-lable"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="ManufacturingYear" class="form-control" readonly="readonly" />
+                </div>
+
+                <span asp-validation-for="ManufacturingYear"></span>
+            </div>
+
+
+
+            
+
+
+            <div class="form-group">
+                <div class="col-4">
+                    <label asp-for="PhoneNumber" class="control-lable"></label>
+                </div>
+                <div class="col-8">
+                    @*<select asp-for="ProductTypeId" asp-items="ViewBag.ProductTypeId" class="form-control"> </select>*@
+                    <input asp-for="PhoneNumber" readonly="readonly" class="form-control" />
+
+                </div>
+
+                <span asp-validation-for="PhoneNumber"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-4">
+                    <label asp-for="LicenceExpirationDate" class="control-lable"></label>
+                </div>
+                <div class="col-8">
+                    @*<select asp-for="SpecialTagId" asp-items="ViewBag.SpecialTagId" class="form-control"> </select>*@
+                    <input asp-for="LicenceExpirationDate" readonly="readonly" class="form-control" />
+                </div>
+
+                <span asp-validation-for="LicenceExpirationDate"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-4">
+                    <label asp-for="BuldingNumber" class="control-lable"></label>
+                </div>
+                <div class="col-8">
+                    @*<select asp-for="ProductTypeId" asp-items="ViewBag.ProductTypeId" class="form-control"> </select>*@
+                    <input asp-for="BuldingNumber" readonly="readonly" class="form-control" />
+
+                </div>
+
+                <span asp-validation-for="BuldingNumber"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-4">
+                    <label asp-for="Street" class="control-lable"></label>
+                </div>
+                <div class="col-8">
+                    @*<select asp-for="ProductTypeId" asp-items="ViewBag.ProductTypeId" class="form-control"> </select>*@
+                    <input asp-for="Street" readonly="readonly" class="form-control" />
+
+                </div>
+
+                <span asp-validation-for="Street"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-4">
+                    <label asp-for="Area" class="control-lable"></label>
+                </div>
+                <div class="col-8">
+                    @*<select asp-for="ProductTypeId" asp-items="ViewBag.ProductTypeId" class="form-control"> </select>*@
+                    <input asp-for="Area" readonly="readonly" class="form-control" />
+
+                </div>
+
+                <span asp-validation-for="Area"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-4">
+                    <label asp-for="City" class="control-lable"></label>
+                </div>
+                <div class="col-8">
+                    @*<select asp-for="ProductTypeId" asp-items="ViewBag.ProductTypeId" class="form-control"> </select>*@
+                    <input asp-for="City" readonly="readonly" class="form-control" />
+
+                </div>
+
+                <span asp-validation-for="City"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-4">
+                    <label asp-for="Governorate" class="control-lable"></label>
+                </div>
+                <div class="col-8">
+                    @*<select asp-for="ProductTypeId" asp-items="ViewBag.ProductTypeId" class="form-control"> </select>*@
+                    <input asp-for="Governorate" readonly="readonly" class="form-control" />
+
+                </div>
+
+                <span asp-validation-for="Governorate"></span>
+            </div>
+
+
+
+            
+
+
+            <br /><br />
+
+
+            <div class="form-group">
+                @if(Model.ReserverId==null){
+                    <a asp-action="Reserve" asp-route-reserverId="@reserverId" asp-route-id="@Model.Id" class="btn btn-primary">Reserve</a>
+
+                    
+
+                }
+                else
+                {
+                    <a disabled-link asp-action="Reserve" asp-route-reserverId="@reserverId" asp-route-id="@Model.Id" class="btn btn-primary">Reserve</a>
+                    
+                    
+                }
+                @if(Model.CreatorId==reserverId)
+                {
+                     <a asp-action="Delete" asp-route-userId="@reserverId" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+                }
+                <a asp-action="Index" class="btn btn-success">Back To List</a>
+                
+            </div>
+
+
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+            <img src="~/@Model.Image" width="100%" style="border-radius:5px;border:1px solid #efefef" />
+        </div>
+
+
+    </div>
+</form>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+

@@ -1,0 +1,94 @@
+﻿@model CarSystem.Models.AppUser
+@{
+    ViewData["Title"] = "Lockout";
+}
+<br />
+
+<h2 class="text-info">Delete User </h2>
+<form asp-action="Lockout" method="post" id="user-form" enctype="multipart/form-data ">
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <h3>@ViewBag.message</h3>
+    <h3>Do you want to lockout this user? </h3>
+    <br />
+    <div class="row">
+
+        <div class="p-4 rounded border p-3">
+            <div class="card-group form-group">
+            </div>
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="UserName" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="UserName" class="form-control" readonly="readonly" />
+                </div>
+                <span asp-validation-for="UserName"></span>
+            </div>
+
+
+
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="FirstName" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="FirstName" class="form-control" readonly="readonly" />
+                </div>
+                <span asp-validation-for="FirstName"></span>
+            </div>
+
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="LastName" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="LastName" class="form-control" readonly="readonly" />
+                </div>
+                <span asp-validation-for="LastName"></span>
+            </div>
+
+
+            <div class="card-group row">
+                <div class="col-5">
+                    <input type="submit" value="Lockout" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-success">Back To List</a>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#user-form").validate({
+                rules: {
+                    Username: {
+                        required: true,
+                    },
+                    PasswordHash: {
+                        required: true,
+                    }
+                },
+                message: {
+                    UserName: "Please enter Your Email",
+                    PasswordHash: "Please enter a Password"
+                }
+
+
+            }
+                            });
+                        });
+    </script>
+    }
+

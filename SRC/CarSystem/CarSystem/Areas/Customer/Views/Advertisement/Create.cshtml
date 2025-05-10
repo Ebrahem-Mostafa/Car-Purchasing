@@ -1,0 +1,159 @@
+﻿@model CarSystem.Models.AdvertisementtViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+<br />
+
+<h2 class="text-info">Add Advertisement </h2>
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <h3>@ViewBag.message</h3>
+
+    <div class="row">
+
+        <div class="p-4 rounded border p-3">
+            <div class="card-group form-group">
+            </div>
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="CarName" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="CarName" class="form-control" />
+                </div>
+                <span asp-validation-for="CarName"></span>
+            </div>
+
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="ManufacturingYear" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="ManufacturingYear" class="form-control" />
+                </div>
+                <span asp-validation-for="ManufacturingYear"></span>
+            </div>
+
+            
+
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="Price" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Price" class="form-control" />
+                </div>
+                <span asp-validation-for="Price"></span>
+            </div>
+
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="PhoneNumber" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="PhoneNumber" class="form-control" />
+                </div>
+                <span asp-validation-for="PhoneNumber"></span>
+            </div>
+
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="BuldingNumber" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="BuldingNumber" class="form-control" />
+                </div>
+                <span asp-validation-for="BuldingNumber"></span>
+            </div>
+
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="Street" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Street" class="form-control" />
+                </div>
+                <span asp-validation-for="Street"></span>
+            </div>
+
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="Area" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Area" class="form-control" />
+                </div>
+                <span asp-validation-for="Area"></span>
+            </div>
+
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="City" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="City" class="form-control" />
+                </div>
+                <span asp-validation-for="City"></span>
+            </div>
+            
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="Governorate" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Governorate" class="form-control" />
+                </div>
+                <span asp-validation-for="Governorate"></span>
+            </div>
+
+
+
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="LicenceExpirationDate" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="LicenceExpirationDate" class="form-control" />
+                </div>
+                <span asp-validation-for="LicenceExpirationDate"></span>
+            </div>
+
+            <div class="card-group row">
+                <div class="col-2">
+                    <label asp-for="Image" class="control-lable"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Image" class="form-control" type="file" />
+                </div>
+                <span asp-validation-for="LicenceExpirationDate"></span>
+            </div>
+
+           
+
+           
+
+         
+
+           
+
+            <div class="card-group row">
+                <div class="col-5">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-success">Back To List</a>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
