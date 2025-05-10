@@ -1,0 +1,90 @@
+﻿@using CarSystem.Models;
+@model IEnumerable<Advertisement>
+@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+	<div class="col-6 text-right">
+		<a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-plus"></i> &nbsp; Create Advertisement</a>
+	</div>
+	<br />
+	<br />
+	<form method="post" asp-action="Index">
+		<div class="row">
+			<div class="col-1 ">
+				<label>Price</label>
+				<input class="form-control" name="price" type="number" />
+			</div>
+
+			<div class="col-1">
+				<label>Car Name</label>
+				<input class="form-control" name="carName" />
+			</div>
+			<div class="col-2">
+				<label>Manufacturing Year</label>
+				<input class="form-control" name="manufacturingYear" type="number" />
+			</div>
+			
+			<div class="col-2">
+				<label> Bulding Number </label>
+				<input class="form-control" name="buldingNumber" type="number" />
+			</div>
+			<div class="col-1">
+				<label> Street</label>
+				<input class="form-control" name="street" />
+			</div>
+			<div class="col-1">
+				<label> Area</label>
+				<input class="form-control" name="area" />
+			</div>
+			<div class="col-1">
+				<label> City</label>
+				<input class="form-control" name="city" />
+			</div>
+			
+			<div class="col-1">
+				<label> Governorate</label>
+				<input class="form-control" name="governorate" />
+			</div>
+
+
+
+			<div class="col-1">
+				<br/>
+				<input type="submit" value="Search" class="btn-success btn" />
+
+			</div>
+
+		</div>
+		<br /><br />
+	</form>
+<div class="row">
+
+		@if (Model?.Any()==true)
+		{
+			@foreach (var advertisement in Model)
+			{
+				<div class="col-4">
+					<div class="card mb-4">
+						<div class="card-header">
+							<h4 class="my-0 font-weight-normal">
+								<label style="font-size: 23px;color:steelblue">@advertisement.CarName</label>
+							</h4>
+						</div>
+						<img src="~/@advertisement.Image" alt="Card Imag" class="card-img-top" style="height:300px;" />
+						<div class="card-header">
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group">
+									<label style="font-size:20px;color:#a51313"><b>Price:@advertisement.Price</b></label>
+								</div>
+								<a asp-action="Details" asp-controller="Advertisement" asp-route-id="@advertisement.Id" class="btn btn-success btn-outline-info ">Details</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		}
+	
+
+</div>

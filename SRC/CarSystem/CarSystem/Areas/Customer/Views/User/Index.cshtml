@@ -1,0 +1,82 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<CarSystem.Models.AppUser>
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<br />
+<div class="row" >
+    <div class="col-6">
+        <h2 style="color:lack">User List</h2>
+    </div>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="col-8 text-right">
+            <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-plus "></i> &nbsp;  New User</a>
+        </div>
+    }
+   
+
+
+  <div>
+      <br />
+        <table class="table table-striped border id="myTable">
+            <thead>
+                <tr class="table-info">
+                    <th>Name</th>
+                    <th>UserName</th>
+                    
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FirstName @item.LastName</td>
+                        <td>@item.UserName</td>
+                        <td>
+                            <partial name="_PartialView" model="@item.Id"/>
+                        </td>
+                        
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+@section scripts{
+
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            let table = new DataTable('#myTable');
+            $('#myTable').DataTable();
+        });
+
+
+        $(function () {
+            var save = '@TempData["save"]'
+            if (save != "")
+                alertify.success(save);
+            var edit = '@TempData["edit"]'
+            if (edit != "")
+                alertify.success(edit);
+            var del = '@TempData["del"]'
+            if (del != "")
+                alertify.success(del);
+        })
+    </script>
+}
+
