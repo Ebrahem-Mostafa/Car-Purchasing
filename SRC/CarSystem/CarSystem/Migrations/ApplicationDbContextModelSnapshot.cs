@@ -32,18 +32,22 @@ namespace CarSystem.Migrations
 
                     b.Property<string>("Area")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int?>("BuldingNumber")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("CarName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("CreatorId")
                         .IsRequired()
@@ -51,7 +55,8 @@ namespace CarSystem.Migrations
 
                     b.Property<string>("Governorate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -61,6 +66,7 @@ namespace CarSystem.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("ManufacturingYear")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
@@ -75,7 +81,8 @@ namespace CarSystem.Migrations
 
                     b.Property<string>("Street")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -112,14 +119,14 @@ namespace CarSystem.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "796be9b3-c2be-4a54-8be9-6fb50ad81db5",
+                            ConcurrencyStamp = "f52890f2-7b22-45a3-9268-421b81afe4c2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "80aec4c2-aa16-4768-9d93-a7a8f16b05c6",
+                            ConcurrencyStamp = "79e98683-61e7-429f-9e55-53051be80c15",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -339,18 +346,21 @@ namespace CarSystem.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.HasDiscriminator().HasValue("AppUser");
 
@@ -359,127 +369,127 @@ namespace CarSystem.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6611cb81-68d7-4c86-9b86-c452433f7c6d",
+                            ConcurrencyStamp = "1817f86c-1979-4119-b50a-5fac56dc33ad",
                             Email = "omar@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "OMAR@GMAIL.COM",
                             NormalizedUserName = "OMAR@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJNV+6dxk1MdvkIaykwyTXPgv+gEHyUxsuE+fv7kww2Za9U2J2a1jExvd9OXr4oI+A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIFY/S+jLLq3LN85zpShoBwjrkmMbInu6rO9ovQZ0xaqurJozmjCFFT4JfqYW8dlAg==",
                             PhoneNumber = "01112686866",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8854ecd2-806f-483a-b877-10ca4d2e5d8d",
+                            SecurityStamp = "ae34628a-a830-44b4-800c-3678bbd379fa",
                             TwoFactorEnabled = false,
                             UserName = "omar@gmail.com",
                             Address = "bj jbh nbj ",
                             Age = 20,
                             FirstName = "Omar",
-                            LastName = "Abdou"
+                            LastName = "Omar"
                         },
                         new
                         {
                             Id = "6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4745a3c1-cad6-4b55-8fb8-cdd386acf892",
+                            ConcurrencyStamp = "4e1dae62-9345-49dc-972a-a18da7f4262a",
                             Email = "zoz@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ZOZ@GMAIL.COM",
                             NormalizedUserName = "ZOZ@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI9H5oE1A+ESTIYVQ3YMroOy73U2BAumlhO051IqUDj9XsZxAmxlsk7+bP8KH5dHcw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGkTwDj4/gqTNh8V6mt5Dh1ZX1koG8KHSsEkdUC0jj+BO0GzI1X6UsdSt6G2gn6wKA==",
                             PhoneNumber = "01112686866",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d0d2c452-e038-4dde-ac8a-3034622eac49",
+                            SecurityStamp = "2c0bbe19-80f2-4fa5-9a59-91b434ff3dcd",
                             TwoFactorEnabled = false,
                             UserName = "zoz@gmail.com",
                             Address = "bj jbh nbj ",
                             Age = 20,
-                            FirstName = "Abdulaziz",
-                            LastName = "Abdou"
+                            FirstName = "Omar",
+                            LastName = "Omar"
                         },
                         new
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "73183d0a-df71-4d12-b83a-ea8f9e4cdc62",
+                            ConcurrencyStamp = "18270e26-be36-4c78-a383-7f8c5b760c74",
                             Email = "anas@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ANAS@GMAIL.COM",
                             NormalizedUserName = "ANAS@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMzc2nBXzu55CRI6YcJh94QcKN5/sCvFpre7TJwxzlvtIU28JcGOT5Ke5nS1l1xqNA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEYaFRkI0Z1EyVRKnFNeM+uTAfmzgiyQuWPRNbHrl5TK6IAiFQlFS9y9GaV5i/3Vdw==",
                             PhoneNumber = "01112686866",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3e361ee8-3460-49a4-a3e0-ab1acaa4108d",
+                            SecurityStamp = "1cf5ccf3-40f8-468a-8814-e446b29adb79",
                             TwoFactorEnabled = false,
                             UserName = "anas@gmail.com",
                             Address = "bj jbh nbj ",
                             Age = 20,
-                            FirstName = "Anas",
-                            LastName = "Mohammed"
+                            FirstName = "Omar",
+                            LastName = "Omar"
                         },
                         new
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c9c0c7eb-6272-40b6-9c15-aa0f40125a34",
+                            ConcurrencyStamp = "6c2c626b-20b1-4b40-b77f-ab0cf15aa7b8",
                             Email = "ebrahim@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EBRAHIM@GMAIL.COM",
                             NormalizedUserName = "EBRAHIM@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE150cOemX091esWHp00aI/remhog7NkHBpQFWn1IW+tR5azSOPfXqr+iErn6oLqPA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEJFPfSUAGvnG7EhGIEipAERa3R4jbFKFuQJ+D32JCZDBc2RcimREK+/4Z6ipWXn7Q==",
                             PhoneNumber = "01112686866",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6b9d013f-7211-4d29-bbd0-6043df084ed1",
+                            SecurityStamp = "99c5d867-9088-4a00-935c-88327b3740b4",
                             TwoFactorEnabled = false,
                             UserName = "ebrahim@gmail.com",
                             Address = "bj jbh nbj ",
                             Age = 20,
-                            FirstName = "Ebrahim",
-                            LastName = "Mustafa"
+                            FirstName = "Omar",
+                            LastName = "Omar"
                         },
                         new
                         {
                             Id = "4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c6f436f6-e5fe-46a9-b90a-3995be47e9e1",
+                            ConcurrencyStamp = "fd85ea15-b671-4733-9be1-2156ccfef0b5",
                             Email = "ehab@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EHAB@GMAIL.COM",
                             NormalizedUserName = "EHAB@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKnHyFZgAEhj+COBkFGxt/UZC2u5i5TlAKLo87eS2JPOgqRbsWuw4vZwjIzSVBf8oQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMdYFF5mN1TAW3gkBjZ2KkDlDiIXQRYDmtQ1qOIWDYuX4Dl5SYOiaGGoZPVRlmSwTA==",
                             PhoneNumber = "01112686866",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "aba7eb77-8858-4d4d-b940-5624df630988",
+                            SecurityStamp = "cff9b3c4-1c55-4490-a4c9-b42ca5ebe07e",
                             TwoFactorEnabled = false,
                             UserName = "ehab@gmail.com",
                             Address = "bj jbh nbj ",
                             Age = 20,
-                            FirstName = "Ehab",
-                            LastName = "Ahmed"
+                            FirstName = "Omar",
+                            LastName = "Omar"
                         },
                         new
                         {
                             Id = "5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5339721b-b993-4a4b-a307-b0447f1496d4",
+                            ConcurrencyStamp = "114de9d1-0e7e-41cd-b8e3-7895332e67b3",
                             Email = "arsany@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ARSANY@GMAIL.COM",
                             NormalizedUserName = "ARSANY@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDvis/DL9Gq8IXA61HZpE57lfKflWdgspR3DbkbfhM552j1iJ3ugqHouAUP0Ae03KQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMfPxnuHbGJfAr6HZHSkPdkNd3AxfaNk2Tnv66CFH8HiRm1j90hqkYvUgGEvWvvi6w==",
                             PhoneNumber = "01112686866",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e12869dc-4f73-4645-a3ae-5b25edbaed0c",
+                            SecurityStamp = "1c3e092a-fdb0-479e-a9fb-e4f3d045aa91",
                             TwoFactorEnabled = false,
                             UserName = "arsany@gmail.com",
                             Address = "bj jbh nbj ",
                             Age = 20,
-                            FirstName = "Arsany",
-                            LastName = "Ashraf"
+                            FirstName = "Omar",
+                            LastName = "Omar"
                         });
                 });
 

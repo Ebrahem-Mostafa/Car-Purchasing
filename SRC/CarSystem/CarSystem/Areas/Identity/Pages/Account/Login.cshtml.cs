@@ -54,16 +54,18 @@ namespace CarSystem.Areas.Identity.Pages.Account
       
         public class InputModel
         {
-            
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Invalid Input")]
+            [RegularExpression(
+        @"^(?![0-9]+@)[a-zA-Z0-9]+([._%+-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,}$",
+        ErrorMessage = "Invalid Input")]
+            [Display(Name = "Email Address")]
             public string Email { get; set; }
 
-
             [Required(ErrorMessage = "Invalid Input")]
-            [StringLength(20, MinimumLength = 8, ErrorMessage = "Invalid Input")]
-            [RegularExpression(@"^(?=.*[a-zA-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,20}$",ErrorMessage = "Invalid Input")]
+            [MinLength(8, ErrorMessage = "Invalid Input")]
+            [RegularExpression(@"^[^\s]{0,20}$", ErrorMessage = "Invalid Input")] 
             [DataType(DataType.Password)]
+            [Display(Name = "Password")]
             public string Password { get; set; }
 
            
@@ -71,8 +73,14 @@ namespace CarSystem.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
+            // Redirect authenticated users to home page
+            if (User.Identity.IsAuthenticated)
+            {
+                return LocalRedirect(returnUrl ?? Url.Content("~/"));
+            }
+
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
@@ -80,17 +88,22 @@ namespace CarSystem.Areas.Identity.Pages.Account
 
             returnUrl ??= Url.Content("~/");
 
-           
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             ReturnUrl = returnUrl;
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
+            if (User.Identity.IsAuthenticated)
+            {
+                return LocalRedirect(returnUrl ?? Url.Content("~/"));
+            }
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -106,10 +119,10 @@ namespace CarSystem.Areas.Identity.Pages.Account
                         var reasons = new List<string>();
 
                         if (!user.EmailConfirmed)
-                            reasons.Add("Email not confirmed");
+                            reasons.Add("Invalid Input");
 
                         if (await _userManager.IsLockedOutAsync(user))
-                            reasons.Add("Account locked out");
+                            reasons.Add("Invalid Input");
 
                        
                         //Console.WriteLine($"Cannot sign in because: {string.Join(", ", reasons)}");
@@ -135,7 +148,7 @@ namespace CarSystem.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Invalid Input");
                     return Page();
                 }
             }

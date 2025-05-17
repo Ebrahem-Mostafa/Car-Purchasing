@@ -3,6 +3,7 @@ using CarSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Optivem.Framework.Core.Domain;
 
 namespace CarSystem
 {
@@ -28,8 +29,18 @@ namespace CarSystem
            .AddViewOptions(options =>
              {
                     options.HtmlHelperOptions.ClientValidationEnabled = true;
-              });
+             });
 
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 8; // Your minimum length
+                options.Password.RequiredUniqueChars = 1;
+            });
 
             var app = builder.Build();
 

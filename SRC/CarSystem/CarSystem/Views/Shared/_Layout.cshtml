@@ -2,7 +2,12 @@
 @inject UserManager<IdentityUser> UserManager
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
-
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var userEmail = user?.Email;
+    var Admins = new string[] { "omar@gmail.com", "zoz@gmail.com", "anas@gmail.com", "ebrahim@gmail.com", "ehab@gmail.com", "arsany@gmail.com" };
+    var isAdmin = userEmail != null && Admins.Contains(userEmail);
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,13 +51,20 @@
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Advertisement" asp-action="GetReservations">Resrvations</a>
                         </li>
 
-                        
+
+
+                        @if (isAdmin)
+                        {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Customer" asp-controller="User" asp-action="Index">Users List</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Customer" asp-controller="User" asp-action="Create">Create User</a>
                             </li>
+                        }
+
+
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Advertisement" asp-action="Create">Create Advertisement</a>
                         </li>

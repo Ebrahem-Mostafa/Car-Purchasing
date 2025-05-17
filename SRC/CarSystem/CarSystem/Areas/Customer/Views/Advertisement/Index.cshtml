@@ -1,90 +1,132 @@
 ﻿@using CarSystem.Models;
 @model IEnumerable<Advertisement>
+@using CarSystem.Models.ViewModels
 @{
-	ViewData["Title"] = "Home Page";
+    var searchModel = ViewData["SearchModel"] as SearchViewModel ?? new SearchViewModel();
+    ViewData["Title"] = "Home Page";
 }
 
 <div class="row">
-	<div class="col-6 text-right">
-		<a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-plus"></i> &nbsp; Create Advertisement</a>
-	</div>
-	<br />
-	<br />
-	<form method="post" asp-action="Index">
-		<div class="row">
-			<div class="col-1 ">
-				<label>Price</label>
-				<input class="form-control" name="price" type="number" />
-			</div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-plus"></i> &nbsp; Create Advertisement</a>
+    </div>
+    <br />
+    <br />
+    <form method="post" asp-action="Index">
+        <div class="row">
+            <!-- Car Name -->
+            <div class="col-1">
+                <label asp-for="@searchModel.CarName" class="control-label"></label>
+                <input asp-for="@searchModel.CarName" name="CarName" class="form-control" type="text" />
+                <span asp-validation-for="@searchModel.CarName" class="text-danger"></span>
 
-			<div class="col-1">
-				<label>Car Name</label>
-				<input class="form-control" name="carName" />
-			</div>
-			<div class="col-2">
-				<label>Manufacturing Year</label>
-				<input class="form-control" name="manufacturingYear" type="number" />
-			</div>
-			
-			<div class="col-2">
-				<label> Bulding Number </label>
-				<input class="form-control" name="buldingNumber" type="number" />
-			</div>
-			<div class="col-1">
-				<label> Street</label>
-				<input class="form-control" name="street" />
-			</div>
-			<div class="col-1">
-				<label> Area</label>
-				<input class="form-control" name="area" />
-			</div>
-			<div class="col-1">
-				<label> City</label>
-				<input class="form-control" name="city" />
-			</div>
-			
-			<div class="col-1">
-				<label> Governorate</label>
-				<input class="form-control" name="governorate" />
-			</div>
+            </div>
+
+            <!-- Price -->
+            <div class="col-1">
+                <label asp-for="@searchModel.Price" class="control-label"></label>
+                <input asp-for="@searchModel.Price" name="Price" class="form-control" type="text" step="0.01" />
+                <span asp-validation-for="@searchModel.Price" class="text-danger"></span>
+            </div>
+
+            <!-- Manufacturing Year -->
+            <div class="col-2">
+                <label asp-for="@searchModel.ManufacturingYear" class="control-label"></label>
+                <input asp-for="@searchModel.ManufacturingYear" name="ManufacturingYear" class="form-control" type="text" />
+                <span asp-validation-for="@searchModel.ManufacturingYear" class="text-danger"></span>
+            </div>
 
 
 
-			<div class="col-1">
-				<br/>
-				<input type="submit" value="Search" class="btn-success btn" />
+            <!-- City -->
+            <div class="col-1">
+                <label asp-for="@searchModel.City" class="control-label"></label>
+                <input asp-for="@searchModel.City" name="City" class="form-control" type="text" />
+                <span asp-validation-for="@searchModel.City" class="text-danger"></span>
+            </div>
+            <!-- Submit Button -->
+            <div class="col-1">
+                <br />
+                <input type="submit" value="Search" class="btn btn-success" />
+            </div>
 
-			</div>
 
-		</div>
-		<br /><br />
-	</form>
-<div class="row">
+            
+               
+                <input type="hidden" asp-for="@searchModel.BuldingNumber" name="BuldingNumber" />
+             
+           
 
-		@if (Model?.Any()==true)
-		{
-			@foreach (var advertisement in Model)
-			{
-				<div class="col-4">
-					<div class="card mb-4">
-						<div class="card-header">
-							<h4 class="my-0 font-weight-normal">
-								<label style="font-size: 23px;color:steelblue">@advertisement.CarName</label>
-							</h4>
-						</div>
-						<img src="~/@advertisement.Image" alt="Card Imag" class="card-img-top" style="height:300px;" />
-						<div class="card-header">
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-									<label style="font-size:20px;color:#a51313"><b>Price:@advertisement.Price</b></label>
-								</div>
-								<a asp-action="Details" asp-controller="Advertisement" asp-route-id="@advertisement.Id" class="btn btn-success btn-outline-info ">Details</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			}
-		}
-	
+           
+               
+                <input type="hidden" asp-for="@searchModel.Street" name="Street" />
+            
+            
 
+          
+               
+                <input type="hidden" asp-for="@searchModel.Area" name="Area"   />
+               
+            
+                
+                <input type="hidden" asp-for="@searchModel.Governorate" name="Governorate"  />
+           
+
+
+     
+           
+        </div>
+
+
+        <br /><br />
+    </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            // Force validation to work with explicit name attributes
+            $.validator.setDefaults({
+                ignore: []
+            });
+
+            // Add custom validation method for complex regex patterns if needed
+            $.validator.addMethod("customregex", function (value, element, regex) {
+                return this.optional(element) || regex.test(value);
+            });
+        });
+    </script>
+}
+
+
+
+	<div class="row">
+
+		@if (Model?.Any() == true)
+    {
+        @foreach (var advertisement in Model)
+        {
+            <div class="col-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">
+                            <label style="font-size: 23px;color:steelblue">@advertisement.CarName</label>
+                        </h4>
+                    </div>
+                    <img src="~/@advertisement.Image" alt="Card Imag" class="card-img-top" style="height:300px;" />
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <label style="font-size:20px;color:#a51313"><b>Price:@advertisement.Price</b></label>
+                            </div>
+                            <a asp-action="Details" asp-controller="Advertisement" asp-route-id="@advertisement.Id" class="btn btn-success btn-outline-info ">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+
+	</div>

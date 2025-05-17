@@ -19,7 +19,7 @@
                     <label asp-for="CarName" class="control-lable"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="CarName" class="form-control" />
+                    <input asp-for="CarName" class="form-control" type="text" />
                 </div>
                 <span asp-validation-for="CarName"></span>
             </div>
@@ -29,7 +29,7 @@
                     <label asp-for="ManufacturingYear" class="control-lable"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="ManufacturingYear" class="form-control" />
+                    <input asp-for="ManufacturingYear" class="form-control" type="text" />
                 </div>
                 <span asp-validation-for="ManufacturingYear"></span>
             </div>
@@ -41,7 +41,7 @@
                     <label asp-for="Price" class="control-lable"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="Price" class="form-control" />
+                    <input asp-for="Price" class="form-control" type="text" />
                 </div>
                 <span asp-validation-for="Price"></span>
             </div>
@@ -51,7 +51,7 @@
                     <label asp-for="PhoneNumber" class="control-lable"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="PhoneNumber" class="form-control" />
+                    <input asp-for="PhoneNumber" class="form-control" type="text" />
                 </div>
                 <span asp-validation-for="PhoneNumber"></span>
             </div>
@@ -61,7 +61,7 @@
                     <label asp-for="BuldingNumber" class="control-lable"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="BuldingNumber" class="form-control" />
+                    <input asp-for="BuldingNumber" class="form-control" type="text" />
                 </div>
                 <span asp-validation-for="BuldingNumber"></span>
             </div>
@@ -71,7 +71,7 @@
                     <label asp-for="Street" class="control-lable"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="Street" class="form-control" />
+                    <input asp-for="Street" class="form-control" type="text" />
                 </div>
                 <span asp-validation-for="Street"></span>
             </div>
@@ -81,7 +81,7 @@
                     <label asp-for="Area" class="control-lable"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="Area" class="form-control" />
+                    <input asp-for="Area" class="form-control" type="text" />
                 </div>
                 <span asp-validation-for="Area"></span>
             </div>
@@ -91,7 +91,7 @@
                     <label asp-for="City" class="control-lable"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="City" class="form-control" />
+                    <input asp-for="City" class="form-control" type="text" />
                 </div>
                 <span asp-validation-for="City"></span>
             </div>
@@ -101,7 +101,7 @@
                     <label asp-for="Governorate" class="control-lable"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="Governorate" class="form-control" />
+                    <input asp-for="Governorate" class="form-control" type="text" />
                 </div>
                 <span asp-validation-for="Governorate"></span>
             </div>
@@ -125,7 +125,7 @@
                 <div class="col-5">
                     <input asp-for="Image" class="form-control" type="file" />
                 </div>
-                <span asp-validation-for="LicenceExpirationDate"></span>
+                <span asp-validation-for="Image"></span>
             </div>
 
            
@@ -153,7 +153,11 @@
 
 @section Scripts{
     @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+       
+    
+
     }
+
 }
 
