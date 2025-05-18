@@ -4,11 +4,44 @@
 @inject UserManager<IdentityUser> UserManager
 
 @{
-    ViewData["Title"] = "Index";
+
+   
+    var searchModel = ViewData["SearchModel"] as CarSystem.Models.ViewModels.EmailViewModel ?? new CarSystem.Models.ViewModels.EmailViewModel();
+    ViewData["Title"] = "Home Page";
 }
 
 <br />
 <br />
+
+
+
+
+<div class="row">
+	
+	<br />
+
+
+    <form method="post" asp-action="Index">
+        <div asp-validation-summary="None"></div> <!-- Explicitly disable -->
+        <div class="row">
+            <!-- Car Name -->
+            <div class="col-4">
+                <label asp-for="@searchModel.Email" class="control-label"></label>
+                <input asp-for="@searchModel.Email" name="Email" class="form-control" type="text" />
+                <span asp-validation-for="@searchModel.Email" class="text-danger"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="col-1">
+                <br />
+                <input type="submit" value="Search" class="btn btn-success" />
+            </div>
+        </div>
+        <br /><br />
+    </form>
+
+</div>
+
 <div class="row" >
     <div class="col-6">
         <h2 style="color:lack">User List</h2>
@@ -35,48 +68,31 @@
                 </tr>
             </thead>
 
+
+
+
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@item.FirstName @item.LastName</td>
-                        <td>@item.UserName</td>
-                        <td>
-                            <partial name="_PartialView" model="@item.Id"/>
-                        </td>
+                   
+                    <form method="post" asp-action="DeleteUser">
+                         <tr>
+                       
+                         <td>@item.Email</td>
+                         <td>
+                            <input type="hidden" name="Email" value="@item.Email" />
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                         </td>
                         
-                    </tr>
+                         </tr>
+                    </form>
                 }
             </tbody>
+
+
+
 
         </table>
     </div>
 
 </div>
-
-@section scripts{
-
-    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-            let table = new DataTable('#myTable');
-            $('#myTable').DataTable();
-        });
-
-
-        $(function () {
-            var save = '@TempData["save"]'
-            if (save != "")
-                alertify.success(save);
-            var edit = '@TempData["edit"]'
-            if (edit != "")
-                alertify.success(edit);
-            var del = '@TempData["del"]'
-            if (del != "")
-                alertify.success(del);
-        })
-    </script>
-}
-

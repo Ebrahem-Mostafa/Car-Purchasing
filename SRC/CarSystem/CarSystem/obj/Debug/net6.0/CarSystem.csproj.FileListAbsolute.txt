@@ -292,3 +292,10 @@ F:\VsProjects\CarSystem\CarSystem\bin\Debug\net6.0\Optivem.Framework.Core.Applic
 F:\VsProjects\CarSystem\CarSystem\bin\Debug\net6.0\Optivem.Framework.Core.Common.dll
 F:\VsProjects\CarSystem\CarSystem\bin\Debug\net6.0\Optivem.Framework.Core.Domain.dll
 F:\VsProjects\CarSystem\CarSystem\bin\Debug\net6.0\Optivem.Framework.Infrastructure.FluentValidation.dll
+F:\VsProjects\CarSystem\CarSystem\bin\Debug\net6.0\System.Web.Mvc.dll
+F:\VsProjects\CarSystem\CarSystem\bin\Debug\net6.0\System.Web.Razor.dll
+F:\VsProjects\CarSystem\CarSystem\bin\Debug\net6.0\System.Web.Helpers.dll
+F:\VsProjects\CarSystem\CarSystem\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+F:\VsProjects\CarSystem\CarSystem\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+F:\VsProjects\CarSystem\CarSystem\bin\Debug\net6.0\System.Web.WebPages.dll
+F:\VsProjects\CarSystem\CarSystem\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll

@@ -1,4 +1,5 @@
-﻿using CarSystem.Models;
+﻿using System.Reflection.Emit;
+using CarSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,11 @@ namespace CarSystem.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+
+          
+            
+
 
             // Seed roles
             builder.Entity<IdentityRole>().HasData(
@@ -43,7 +49,7 @@ namespace CarSystem.Data
                     PasswordHash = hasher.HashPassword(null, "Ab@123456789"),
                     SecurityStamp = Guid.NewGuid().ToString(),
                     FirstName= "Omar",
-                    LastName="Abdou",
+                    LastName= "Omar",
                     Address="bj jbh nbj ",
                     Age=20,
                     PhoneNumber="01112686866",
@@ -61,8 +67,8 @@ namespace CarSystem.Data
                     EmailConfirmed = true,
                     PasswordHash = hasher.HashPassword(null, "Ab@123456789"),
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    FirstName = "Abdulaziz",
-                    LastName = "Abdou",
+                    FirstName = "Omar",
+                    LastName = "Omar",
                     Address = "bj jbh nbj ",
                     Age = 20,
                     PhoneNumber = "01112686866",
@@ -77,8 +83,8 @@ namespace CarSystem.Data
                     EmailConfirmed = true,
                     PasswordHash = hasher.HashPassword(null, "Ab@123456789"),
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    FirstName = "Anas",
-                    LastName = "Mohammed",
+                    FirstName = "Omar",
+                    LastName = "Omar",
                     Address = "bj jbh nbj ",
                     Age = 20,
                     PhoneNumber = "01112686866",
@@ -94,8 +100,8 @@ namespace CarSystem.Data
                     EmailConfirmed = true,
                     PasswordHash = hasher.HashPassword(null, "Ab@123456789"),
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    FirstName = "Ebrahim",
-                    LastName = "Mustafa",
+                    FirstName = "Omar",
+                    LastName = "Omar",
                     Address = "bj jbh nbj ",
                     Age = 20,
                     PhoneNumber = "01112686866",
@@ -111,8 +117,8 @@ namespace CarSystem.Data
                     EmailConfirmed = true,
                     PasswordHash = hasher.HashPassword(null, "Ab@123456789"),
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    FirstName = "Ehab",
-                    LastName = "Ahmed",
+                    FirstName = "Omar",
+                    LastName = "Omar",
                     Address = "bj jbh nbj ",
                     Age = 20,
                     PhoneNumber = "01112686866",
@@ -128,8 +134,8 @@ namespace CarSystem.Data
                     EmailConfirmed = true,
                     PasswordHash = hasher.HashPassword(null, "Ab@123456789"),
                     SecurityStamp = Guid.NewGuid().ToString(),
-                    FirstName = "Arsany",
-                    LastName = "Ashraf",
+                    FirstName = "Omar",
+                    LastName = "Omar",
                     Address = "bj jbh nbj ",
                     Age = 20,
                     PhoneNumber = "01112686866",

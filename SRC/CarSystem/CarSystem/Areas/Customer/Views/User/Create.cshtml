@@ -26,7 +26,7 @@
 
             <div class="card-group row">
                 <div class="col-2">
-                    <label asp-for="PasswordHash" class="control-lable"></label>
+                    <label asp-for="PasswordHash" class="control-lable">Password</label>
                 </div>
                 <div class="col-5">
                     <input asp-for="PasswordHash" class="form-control" type="password" />
@@ -69,7 +69,7 @@
                     <label asp-for="Age" class="control-lable"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="Age" class="form-control" />
+                    <input asp-for="Age" class="form-control" type="text" />
                 </div>
                 <span asp-validation-for="Age"></span>
             </div>

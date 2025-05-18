@@ -50,60 +50,76 @@ namespace CarSystem.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-          
             [Required(ErrorMessage = "Invalid Input")]
-            [EmailAddress(ErrorMessage = "Invalid Input")]
-            [Display(Name = "Email")]
+            [RegularExpression(
+        @"^(?![0-9]+@)[a-zA-Z0-9]+([._%+-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,}$",
+        ErrorMessage = "Invalid Input")]
+            [Display(Name = "Email Address")]
             public string Email { get; set; }
 
             [Required(ErrorMessage = "Invalid Input")]
-            [StringLength(20, MinimumLength = 8, ErrorMessage = "Invalid Input")]
-            [RegularExpression(@"^(?=.*[a-zA-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,20}$", ErrorMessage = "Invalid Input")]
-            [DataType(DataType.Password, ErrorMessage = "Invalid Input")]
+            [MinLength(8, ErrorMessage = "Invalid Input")]
+            [RegularExpression(@"^[^\s]{0,20}$", ErrorMessage = "Invalid Input")] 
+            [DataType(DataType.Password)]
+            [Display(Name = "Password")]
+
             public string Password { get; set; }
 
-          
-            [DataType(DataType.Password)]
+            
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "Invalid Input")]
+            [DataType(DataType.Password)]
             public string ConfirmPassword { get; set; }
 
+
+
+			[Required(ErrorMessage = "Invalid Input")]
+            [RegularExpression(@"^[a-zA-Z]{0,8}$", ErrorMessage = "Invalid Input")]
+            [Display(Name = "First Name")]
+			public string FirstName { get; set; }
             [Required(ErrorMessage = "Invalid Input")]
-            [StringLength(8, ErrorMessage = "Invalid Input")]
-            [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Invalid Input")]
-            public string FirstName { get; set; }
+            [RegularExpression(@"^[a-zA-Z]{0,8}$", ErrorMessage = "Invalid Input")]
+            [Display(Name = "Last Name")]
+			public string LastName { get; set; }
 
             [Required(ErrorMessage = "Invalid Input")]
-            [StringLength(8, ErrorMessage = "Invalid Input")]
-            [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Invalid Input")]
-            public string LastName { get; set; }
-
-            [Required(ErrorMessage = "Invalid Input")]
-            [StringLength(30, ErrorMessage = "Invalid Input")]
-            [RegularExpression(@"^[a-zA-Z0-9\s.,]+$",ErrorMessage = "Invalid Input")]
+            [RegularExpression(@"^[a-zA-Z0-9\s.,]{0,30}$", ErrorMessage = "Invalid Input")]
+            [Display(Name = "Address")]
             public string Address { get; set; }
 
-            [Required(ErrorMessage = "Invalid Input")]
-            [Range(18, 120, ErrorMessage = "Invalid Input")]
-            [RegularExpression("^[0-9]+$", ErrorMessage = "Invalid Input")]
-            public int Age { get; set; }
+			[Required(ErrorMessage = "Invalid Input")]
+			[Range(18, 100, ErrorMessage = "Invalid Input")]
+			[RegularExpression(@"^[0-9]+$", ErrorMessage = "Invalid Input")]
+			[Display(Name = "Age")]
+			public int Age { get; set; }
 
-            [Required(ErrorMessage = "Invalid Input")]
-            [StringLength(12, ErrorMessage = "Invalid Input")]
-            [RegularExpression(@"^20[0-9]{10}$",ErrorMessage = "Invalid Input")]
-            public string PhoneNumber { get; set; }
+			[Required(ErrorMessage = "Invalid Input")]
+			[RegularExpression(@"^201\d{9}$", ErrorMessage = "Invalid Input")]
+			[Display(Name = "Phone Number")]
+			public string PhoneNumber { get; set; }
 
         }
 
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
+            // Redirect authenticated users to home page
+            if (User.Identity.IsAuthenticated)
+            {
+                return LocalRedirect(returnUrl ?? Url.Content("~/"));
+            }
+
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return LocalRedirect(returnUrl ?? Url.Content("~/"));
+            }
             returnUrl ??= Url.Content("~/");
          
             if (ModelState.IsValid)
@@ -122,6 +138,9 @@ namespace CarSystem.Areas.Identity.Pages.Account
 
                
                 var result = await _userManager.CreateAsync(user, Input.Password);
+              
+
+               
                 if (result.Succeeded)
                 {
                   
@@ -147,7 +166,10 @@ namespace CarSystem.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    if (error.Code == "DuplicateUserName" || error.Code == "DuplicateEmail")
+                    {
+                        ModelState.AddModelError(string.Empty, "Email already registered");
+                    }
                 }
             }
 

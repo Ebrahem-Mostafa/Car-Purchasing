@@ -3,10 +3,16 @@
 @model CarSystem.Models.Advertisement
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+
+
+
 @{
     ViewData["Title"] = "Details";
     string reserverId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
+    var user = await UserManager.GetUserAsync(User);
+    var userEmail = user?.Email;
+    var Admins = new string[] { "omar@gmail.com", "zoz@gmail.com", "anas@gmail.com", "ebrahim@gmail.com", "ehab@gmail.com", "arsany@gmail.com" };
+    var isAdmin = userEmail != null && Admins.Contains(userEmail);
 
 }
 <br />
@@ -65,7 +71,7 @@
 
 
 
-            
+
 
 
             <div class="form-group">
@@ -162,33 +168,43 @@
 
 
 
-            
+
 
 
             <br /><br />
 
 
             <div class="form-group">
-                @if(Model.ReserverId==null){
-                    <a asp-action="Reserve" asp-route-reserverId="@reserverId" asp-route-id="@Model.Id" class="btn btn-primary">Reserve</a>
+                @{
+                    // Safely get the email once
+                    var userEmail0 = ViewData["Email"]?.ToString();
 
-                    
+                }
 
-                }
-                else
+                @if (Model.ReserverId == null && Model.CreatorId != userEmail0)
                 {
-                    <a disabled-link asp-action="Reserve" asp-route-reserverId="@reserverId" asp-route-id="@Model.Id" class="btn btn-primary">Reserve</a>
-                    
-                    
+                    <a asp-action="Reserve" asp-route-reserverId="@userEmail0" asp-route-id="@Model.Id" class="btn btn-primary">Reserve Now</a>
                 }
-                @if(Model.CreatorId==reserverId)
+
+
+                @if (Model.ReserverId != null && Model.ReserverId == userEmail0)
                 {
-                     <a asp-action="Delete" asp-route-userId="@reserverId" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+                    <a asp-action="CancelReserve"  asp-route-id="@Model.Id" class="btn btn-primary">Cancel Reservation</a>
                 }
+
+                @if (Model.CreatorId == userEmail0 || isAdmin)
+                    {
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+                }
+
                 <a asp-action="Index" class="btn btn-success">Back To List</a>
-                
             </div>
-
+            @if (TempData["ReservationMessage"] != null)
+            {
+                <div class="alert alert-success">
+                    <h2>@TempData["ReservationMessage"]</h2>
+                </div>
+            }
 
         </div>
         <div class="col-1"></div>
